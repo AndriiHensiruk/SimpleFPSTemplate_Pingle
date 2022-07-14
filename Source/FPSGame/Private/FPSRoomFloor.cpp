@@ -16,11 +16,26 @@ AFPSRoomFloor::AFPSRoomFloor()
 void AFPSRoomFloor::BeginPlay()
 {
 	Super::BeginPlay();
-	SpawnItem(BallClas);
-	SpawnItem(BallClas);
-	SpawnItem(BallClas);
-	SpawnItem(BallClas);
-	SpawnItem(BallClas);
+	//
+	SpawnBall();
+}
+
+
+
+void AFPSRoomFloor::SpawnBall()
+{
+	
+	
+	for (int i = 0; i < NumOfBall; i++) {
+		SpawnItem(BallClas);
+		UE_LOG(LogTemp, Log, TEXT("Ball!!!"));
+	}
+	
+
+		
+	
+
+	
 }
 
 // Called every frame
