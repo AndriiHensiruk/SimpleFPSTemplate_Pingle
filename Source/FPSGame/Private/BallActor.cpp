@@ -1,0 +1,46 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "BallActor.h"
+
+// Sets default values
+ABallActor::ABallActor()
+{
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+
+}
+
+// Called when the game starts or when spawned
+void ABallActor::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
+void ABallActor::DestroyBall()
+{
+	TArray<AActor*>CollectedActor;
+
+	GetOverlappingActors(CollectedActor);
+
+	for (int i = 0; i < CollectedActor.Num(); ++i) {
+		AFPSProjectile* const Ball = Cast<AFPSProjectile>(CollectedActor[i]);
+		if (Ball) {
+			AFPSCharacter* const Score = Cast<AFPSCharacter>(CollectedActor[i]);
+			Score->score++;
+			Destroy();
+		}
+		
+		
+	}
+}
+
+// Called every frame
+void ABallActor::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	DestroyBall();
+
+}
+
