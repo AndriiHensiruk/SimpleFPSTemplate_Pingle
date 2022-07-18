@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "FPSRoomFloor.h"
+#include "BallActor.h"
 #include "FPSCharacter.generated.h"
 
 class UInputComponent;

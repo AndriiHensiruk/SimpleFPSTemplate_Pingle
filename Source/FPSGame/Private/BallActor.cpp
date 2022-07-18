@@ -2,6 +2,7 @@
 
 
 #include "BallActor.h"
+#include "FPSRoomFloor.h"
 
 // Sets default values
 ABallActor::ABallActor()
@@ -19,28 +20,17 @@ void ABallActor::BeginPlay()
 }
 
 void ABallActor::DestroyBall()
-{
-	TArray<AActor*>CollectedActor;
-
-	GetOverlappingActors(CollectedActor);
-
-	for (int i = 0; i < CollectedActor.Num(); ++i) {
-		AFPSProjectile* const Ball = Cast<AFPSProjectile>(CollectedActor[i]);
-		if (Ball) {
-			AFPSCharacter* const Score = Cast<AFPSCharacter>(CollectedActor[i]);
-			Score->score++;
+{	
 			Destroy();
-		}
-		
-		
-	}
+			AFPSRoomFloor Ball;
+				Ball.TotalObject--;
 }
 
 // Called every frame
 void ABallActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	DestroyBall();
+	//DestroyBall();
 
 }
 

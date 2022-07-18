@@ -5,6 +5,17 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "BallActor.h"
+#include "SphereTrace.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "SphereTrace.h"
+
+
+#include "TimerManager.h"
+#include "Runtime/Engine/Classes/GameFramework/Actor.h"
+#include "Runtime/CoreUObject/Public/UObject/Object.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
+#include "Engine/Public/TimerManager.h"
+#include "DrawDebugHelpers.h"
 #include "FPSRoomFloor.generated.h"
 
 
@@ -48,6 +59,15 @@ public:
 		float StageMaxDelay;
 
 	
+	UPROPERTY(EditAnywhere, Category = "Ball")
+		int32 TotalObject;
+	
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trace")
+		float RadarDistance = 5000.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trace")
+		float RadarHeight = 500.f;
+
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Room, meta = (AllowPrivateAccess = "true"))
@@ -55,6 +75,17 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Room, meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<AActor> BallClas;
+	
+
+	FTimerHandle RadarSweepTimerHandle;
 
 	void SpawnItem(UClass* ItemToSpawn);
+
+	
+	void CountBall();
+	UFUNCTION()
+	void RadarRaycast();
+	UFUNCTION()
+	void RadarSweepTimer();
+	
 };

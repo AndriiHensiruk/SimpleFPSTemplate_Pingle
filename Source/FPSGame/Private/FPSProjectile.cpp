@@ -49,7 +49,7 @@ void AFPSProjectile::Explode()
 	// Allow BP to trigger additional logic
 	BlueprintExplode();
 
-	Destroy();
+	Destroy(true, true);
 }
 
 void AFPSProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -66,7 +66,7 @@ void AFPSProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPr
 
 		if (Scale.GetMin() < 0.5f)
 		{
-			OtherActor->Destroy();
+			OtherActor->Destroy(true, true);
 		}
 		else
 		{
